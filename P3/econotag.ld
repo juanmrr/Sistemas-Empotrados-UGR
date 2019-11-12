@@ -27,9 +27,10 @@ MEMORY
 SECTIONS
 {
         /* Código del programa */
-        .text : ALIGN(4)
+        .text :
         {
                 *(.text);
+		. = ALIGN(4);
         } > ram0
 
 	/*.ram1 : ALIGN(4)
@@ -47,19 +48,22 @@ SECTIONS
                 s3 = .;
         } > ram3*/
 
-	.data : ALIGN(4)
+	.data : 
 	{
 		*(.data);
+		. = ALIGN(4);
 	} > ram1
 
-	.gpio : ALIGN(4)
+	.gpio :
 	{
-		gpio_pad_dir0 = . + 0x00000000;
-		gpio_dir_set1 = . + 0x0000005c;
-		gpio_data0 = . + 0x00000008;
-		gpio_data_set0 = . + 0x00000048;
-		gpio_data_set1 = . + 0x0000004c;
-		gpio_data_reset1 = . + 0x00000054;
+		gpio_pad_dir0 = 	. + 0x00000000;
+		gpio_dir_set1 = 	. + 0x0000005c;
+		gpio_data0 = 		. + 0x00000008;
+		gpio_data_set0 = 	. + 0x00000048;
+		gpio_data_set1 = 	. + 0x0000004c;
+		gpio_data_reset1 = 	. + 0x00000054;
+
+		. = ALIGN(4);
 	} > gpio
 
 }
